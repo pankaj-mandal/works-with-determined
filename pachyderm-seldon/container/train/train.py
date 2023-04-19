@@ -79,8 +79,10 @@ def clone_code(repo_url, ref, dir):
     if os.path.isdir(dir):
         repo = git.Repo(dir)
         repo.remotes.origin.fetch()
+        print("fetched from remote")
     else:
         repo = git.Repo.clone_from(repo_url, dir)
+        print("cloning repo")
     repo.git.checkout(ref)
 
 # =====================================================================================
@@ -99,8 +101,8 @@ def read_config(conf_file):
 
 def setup_config(config_file, repo, pipeline, job_id):
     config = read_config(config_file)
-    config["data"]["pachyderm"]["host"]   = os.getenv("PACHD_LB_SERVICE_HOST")
-    config["data"]["pachyderm"]["port"]   = os.getenv("PACHD_LB_SERVICE_PORT")
+    config["data"]["pachyderm"]["host"]   = os.getenv("PAC_MASTER")
+    config["data"]["pachyderm"]["port"]   = os.getenv("PAC_PORT")
     config["data"]["pachyderm"]["repo"]   = repo
     config["data"]["pachyderm"]["branch"] = job_id
     config["data"]["pachyderm"]["token"]  = os.getenv("PAC_TOKEN")
@@ -123,9 +125,11 @@ def create_client():
 def execute_experiment(client, configfile, code_path, checkpoint):
     try:
         if checkpoint is None:
+            print("Creating experiment")
             parent_id = None
             exp = client.create_experiment(configfile, code_path)
         else:
+            print("Continuing experiment")
             parent_id = checkpoint.training.experiment_id
             exp = client.continue_experiment(configfile, parent_id, checkpoint.uuid)
 

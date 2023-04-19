@@ -7,15 +7,15 @@
     "pfs": {
       "name": "data",
       "repo": "dogs-and-cats",
-      "branch": "master",
+      "branch": "FOUNDENG-522",
       "glob": "/",
       "empty_files": true
     }
   },
   "transform": {
     "cmd": ["/bin/sh"],
-    "stdin": ["python train.py --git-url https://git@github.com:/determined-ai/works-with-determined.git --git-ref master --sub-dir pachyderm-seldon/use-case/image-classification/experiment --config const.yaml --repo dogs-and-cats --model dogs-and-cats"],
-    "image": "gcr.io/determined-ai/pachyderm-seldon/train:0.0.20",
+    "stdin": ["python train.py --git-url https://git@github.com:/mandal-pankaj/works-with-determined.git --git-ref FOUNDENG-522 --sub-dir pachyderm-seldon/use-case/image-classification/experiment --config const.yaml --repo dogs-and-cats --model dogs-and-cats"],
+    "image": "mandalpa/train:0.0.1",
     "secrets": [
       {
         "name": "pipeline-secret",
@@ -31,6 +31,16 @@
         "name": "pipeline-secret",
         "key": "det_password",
         "env_var": "DET_PASSWORD"
+      },
+      {
+        "name": "pipeline-secret",
+        "key": "pac_master",
+        "env_var": "PAC_MASTER"
+      },
+      {
+        "name": "pipeline-secret",
+        "key": "pac_port",
+        "env_var": "PAC_PORT"
       },
       {
         "name": "pipeline-secret",

@@ -40,6 +40,7 @@ class CatDogDataset(Dataset):
 
 def download_pach_repo(pachyderm_host, pachyderm_port, repo, branch, root, token):
     print(f"Starting to download dataset: {repo}@{branch} --> {root}")
+    print(f"Pachyderm host is {pachyderm_host} and Pachyderm port is {pachyderm_port}")
 
     if not os.path.exists(root):
         os.makedirs(root)
@@ -51,6 +52,7 @@ def download_pach_repo(pachyderm_host, pachyderm_port, repo, branch, root, token
         src_path = diff.new_file.file.path
         des_path = os.path.join(root, src_path[1:])
         # print(f"Got src='{src_path}', des='{des_path}'")
+        print(f"Got src='{src_path}', des='{des_path}'")
 
         if diff.new_file.file_type == FileType.FILE:
             if src_path != "":

@@ -1,6 +1,6 @@
 # Requirements for the IDE
 
-determined==0.18.1
+determined==0.21.1
 torch==1.10.2
 Pillow==9.3.0
 numpy==1.22.2

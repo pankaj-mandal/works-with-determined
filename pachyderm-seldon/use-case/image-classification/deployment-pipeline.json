@@ -7,7 +7,7 @@
     "pfs": {
       "name": "data",
       "repo": "dogs-and-cats-model",
-      "branch": "master",
+      "branch": "FOUNDENG-522",
       "glob": "/"
     }
   },

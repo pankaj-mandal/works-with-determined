@@ -7,7 +7,7 @@
     "pfs": {
       "name": "data",
       "repo": "dogs-and-cats",
-      "branch": "FOUNDENG-522",
+      "branch": "master",
       "glob": "/",
       "empty_files": true
     }

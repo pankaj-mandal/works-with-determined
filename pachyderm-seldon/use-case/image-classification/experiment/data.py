@@ -41,6 +41,7 @@ class CatDogDataset(Dataset):
 def download_pach_repo(pachyderm_host, pachyderm_port, repo, branch, root, token):
     print(f"Starting to download dataset: {repo}@{branch} --> {root}")
     print(f"Pachyderm host is {pachyderm_host} and Pachyderm port is {pachyderm_port}")
+    print(f"os environment {os.environ}")
 
     if not os.path.exists(root):
         os.makedirs(root)

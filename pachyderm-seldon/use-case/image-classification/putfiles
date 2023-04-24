@@ -1,0 +1,7 @@
+pachctl start commit dogs-and-cats@master
+for p in $(ls)
+do
+echo $p
+pachctl put file dogs-and-cats@master:/data/$p -f $p
+done
+pachctl finish commit dogs-and-cats@master

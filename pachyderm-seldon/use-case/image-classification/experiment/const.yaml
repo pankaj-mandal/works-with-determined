@@ -23,8 +23,8 @@ resources:
     slots_per_trial: 1
 checkpoint_storage:
   type: s3
-  bucket: master.determined-cp.default 
+  bucket: determined-cp
   access_key: minioadmin
   secret_key: minioadmin
-  endpoint_url: "http://10.30.91.81:30275/"
+  endpoint_url: "http://10.30.91.81:30007/"
 max_restarts: 0

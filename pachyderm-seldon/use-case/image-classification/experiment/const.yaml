@@ -23,7 +23,7 @@ resources:
     slots_per_trial: 1
 checkpoint_storage:
   type: s3
-  bucket: determined-cp
+  bucket: master.determined-cp.default 
   access_key:
   secret_key:
   endpoint_url: "http://10.30.91.81:30275/"

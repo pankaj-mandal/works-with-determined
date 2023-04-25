@@ -24,7 +24,7 @@ resources:
 checkpoint_storage:
   type: s3
   bucket: master.determined-cp.default 
-  access_key:
-  secret_key:
+  access_key: minioadmin
+  secret_key: minioadmin
   endpoint_url: "http://10.30.91.81:30275/"
 max_restarts: 0

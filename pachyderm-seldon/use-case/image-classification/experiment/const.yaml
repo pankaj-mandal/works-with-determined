@@ -26,5 +26,5 @@ checkpoint_storage:
   bucket: determined-cp
   access_key: minioadmin
   secret_key: minioadmin
-  endpoint_url: "http://10.30.91.81:30007/"
+  endpoint_url: "http://10.30.91.81:30008/"
 max_restarts: 0

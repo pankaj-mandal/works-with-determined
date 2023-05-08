@@ -1,5 +1,5 @@
 pachctl start commit dogs-and-cats@master
-for p in $(ls)
+for p in $(ls *.2*.jpg)
 do
 echo $p
 pachctl put file dogs-and-cats@master:/data/$p -f $p

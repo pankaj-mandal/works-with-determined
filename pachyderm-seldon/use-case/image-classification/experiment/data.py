@@ -91,12 +91,13 @@ def download_pach_repo(pachyderm_host, pachyderm_port, repo, branch, root, token
             os.makedirs(des_path, exist_ok=True)
 
     for src_path, des_path in files:
-        src_file = client.get_file((repo, branch), src_path)
+        # src_file = client.get_file((repo, branch), src_path)
+        bucket_name = branch + "." + repo + ".default"
+        fget_object(bucket_name, src_path, des_path)
+        print(f'Downloaded {src_path} to {des_path}')
 
-        print(f'Downloading {src_path} to {des_path}')
-
-        with open(des_path, "wb") as dest_file:
-            shutil.copyfileobj(src_file, dest_file)
+        # with open(des_path, "wb") as dest_file:
+        #     shutil.copyfileobj(src_file, dest_file)
 
     print("Download operation ended")
     return files

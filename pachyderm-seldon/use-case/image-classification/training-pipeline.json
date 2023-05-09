@@ -14,7 +14,7 @@
   },
   "transform": {
     "cmd": ["/bin/sh"],
-    "stdin": ["python train.py --git-url https://git@github.com:/pankaj-mandal/works-with-determined.git --git-ref FOUNDENG-574 --sub-dir pachyderm-seldon/use-case/image-classification/experiment --config const.yaml --repo dogs-and-cats --model dogs-and-cats"],
+    "stdin": ["python train.py --git-url https://git@github.com:/pankaj-mandal/works-with-determined.git --git-ref FOUNDENG-574 --sub-dir pachyderm-seldon/use-case/image-classification/experiment --config const.yaml --repo dogs-and-cats --model dogs-and-cats-1"],
     "image": "mandalpa/train:0.0.1",
     "secrets": [
       {

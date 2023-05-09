@@ -7,6 +7,11 @@ from PIL import Image
 from python_pachyderm.proto.v2.pfs.pfs_pb2 import FileType
 from skimage import io
 from torch.utils.data import Dataset
+from minio import Minio
+from minio.error import InvalidResponseError
+import logging
+import os
+from progress import Progress
 
 # ======================================================================================================================
 
@@ -35,8 +40,31 @@ class CatDogDataset(Dataset):
         return sample
 
 
+
 # ======================================================================================================================
 
+def fget_object(bucket_name, object_name, destination_file=None, version_id=None):
+    logging.basicConfig(level=logging.INFO)
+    minio_client = Minio('10.30.91.81:30275',
+                   access_key='',
+                   secret_key='',
+                   secure=False)
+
+    # Get an object object_name with contents from
+    # filepath as content_type.
+    if destination_file == None:
+        destination_file = object_name
+    try:
+        response = minio_client.fget_object(bucket_name, object_name, destination_file, version_id=version_id, progress=Progress()
+                       )
+        logging.info(
+           "object_name: {0}".format(
+                response.object_name
+            ),
+
+        )
+    except InvalidResponseError as err:
+        logging.error("file get error", err)
 
 def download_pach_repo(pachyderm_host, pachyderm_port, repo, branch, root, token):
     print(f"Starting to download dataset: {repo}@{branch} --> {root}")
@@ -64,7 +92,8 @@ def download_pach_repo(pachyderm_host, pachyderm_port, repo, branch, root, token
 
     for src_path, des_path in files:
         src_file = client.get_file((repo, branch), src_path)
-        # print(f'Downloading {src_path} to {des_path}')
+
+        print(f'Downloading {src_path} to {des_path}')
 
         with open(des_path, "wb") as dest_file:
             shutil.copyfileobj(src_file, dest_file)

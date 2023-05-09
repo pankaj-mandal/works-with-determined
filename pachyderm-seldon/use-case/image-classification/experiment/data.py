@@ -43,12 +43,8 @@ class CatDogDataset(Dataset):
 
 # ======================================================================================================================
 
-def fget_object(pachyderm_host, bucket_name, object_name, destination_file=None, version_id=None):
+def fget_object(minio_client, bucket_name, object_name, destination_file=None, version_id=None):
     logging.basicConfig(level=logging.INFO)
-    minio_client = Minio(pachyderm_host + ':30275',
-                   access_key='',
-                   secret_key='',
-                   secure=False)
 
     # Get an object object_name with contents from
     # filepath as content_type.
@@ -76,6 +72,10 @@ def download_pach_repo(pachyderm_host, pachyderm_port, repo, branch, root, token
 
     client = python_pachyderm.Client(host=pachyderm_host, port=pachyderm_port, auth_token=token)
     files = []
+    minio_client = Minio(pachyderm_host + ':30275',
+                   access_key='',
+                   secret_key='',
+                   secure=False)
 
     for diff in client.diff_file((repo, branch), "/"):
         src_path = diff.new_file.file.path
@@ -93,7 +93,7 @@ def download_pach_repo(pachyderm_host, pachyderm_port, repo, branch, root, token
     for src_path, des_path in files:
         # src_file = client.get_file((repo, branch), src_path)
         bucket_name = "master." + repo + ".default"
-        fget_object(pachyderm_host, bucket_name, src_path, des_path, version_id=branch)
+        fget_object(minio_client, bucket_name, src_path, des_path, version_id=branch)
         print(f'Downloaded {src_path} to {des_path}')
 
         # with open(des_path, "wb") as dest_file:

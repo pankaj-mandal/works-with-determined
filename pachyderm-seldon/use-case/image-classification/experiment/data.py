@@ -55,7 +55,7 @@ def fget_object(pachyderm_host, bucket_name, object_name, destination_file=None,
     if destination_file == None:
         destination_file = object_name
     try:
-        response = minio_client.fget_object(bucket_name, object_name, destination_file, version_id=version_id, progress=Progress()
+        response = minio_client.fget_object(bucket_name, object_name, destination_file, version_id=version_id, progress=Progress(interval=2)
                        )
         logging.info(
            "object_name: {0}".format(

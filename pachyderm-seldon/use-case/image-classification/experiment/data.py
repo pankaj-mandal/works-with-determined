@@ -92,8 +92,8 @@ def download_pach_repo(pachyderm_host, pachyderm_port, repo, branch, root, token
 
     for src_path, des_path in files:
         # src_file = client.get_file((repo, branch), src_path)
-        bucket_name = branch + "." + repo + ".default"
-        fget_object(bucket_name, src_path, des_path)
+        bucket_name = "master." + repo + ".default"
+        fget_object(bucket_name, src_path, des_path, version_id=branch)
         print(f'Downloaded {src_path} to {des_path}')
 
         # with open(des_path, "wb") as dest_file:

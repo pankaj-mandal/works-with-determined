@@ -1,4 +1,7 @@
 name: dogcat_single
+environment:
+    image: determinedai/environments:pach-cuda-11.3-pytorch-1.12-tf-2.8-gpu-9b5db1b
+name: dogcat_single
 data:
     pachyderm:
       host:
@@ -21,10 +24,4 @@ searcher:
 entrypoint: model_def:DogCatModel
 resources:
     slots_per_trial: 1
-checkpoint_storage:
-  type: s3
-  bucket: determined-cp
-  access_key: minioadmin
-  secret_key: minioadmin
-  endpoint_url: "http://10.30.91.81:30008/"
 max_restarts: 0
